@@ -72,11 +72,10 @@
                 <p class="text-slate-500 mt-1">Gagasan umum, edukasi, dan materi modul pembelajaran.</p>
             </div>
             <button onclick="toggleModal('cmsModal')" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2" id="cmsBtn">
-                <i class="fa-solid fa-plus"></i> Tambah / Edit Konten
+                <i class="fa-solid fa-plus"></i> Kelola & Tambah Konten
             </button>
         </div>
 
-        <!-- ID articleGrid ditambahkan untuk menampung artikel baru -->
         <div id="articleGrid" class="grid md:grid-cols-3 gap-8">
             <!-- Artikel Bawaan 1 -->
             <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
@@ -127,9 +126,9 @@
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-indigo-900">
                         <i class="fa-solid fa-school text-indigo-600"></i> Kegiatan Sekolah Terkini
                     </h3>
-                    <div class="space-y-4">
+                    <div id="kegiatanList" class="space-y-4">
                         <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition">
-                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover shrink-0">
                             <div>
                                 <h4 class="font-bold text-sm">Workshop Literasi Digital Siswa</h4>
                                 <p class="text-xs text-slate-500 mt-1">Pelatihan pembuatan konten edukatif dan etika bermedia sosial.</p>
@@ -144,9 +143,9 @@
                     <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-indigo-900">
                         <i class="fa-solid fa-palette text-indigo-600"></i> Hasil Karya Siswa
                     </h3>
-                    <div class="space-y-4">
+                    <div id="karyaList" class="space-y-4">
                         <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition">
-                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover">
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=200&q=80" class="w-20 h-20 rounded-lg object-cover shrink-0">
                             <div>
                                 <h4 class="font-bold text-sm">Desain Poster Kampanye Lingkungan</h4>
                                 <p class="text-xs text-slate-500 mt-1">Karya Kelas XI MIPA - Juara 1 Lomba Seni Antar Sekolah.</p>
@@ -159,12 +158,12 @@
         </div>
     </section>
 
-    <!-- GALERI & INTEGRASI MEDIA SOSIAL (YOUTUBE, TIKTOK, INSTAGRAM) -->
+    <!-- GALERI & INTEGRASI MEDIA SOSIAL -->
     <section id="galeri" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-slate-900 mb-2">Galeri & Media Embed</h2>
         <p class="text-slate-500 mb-8">Dokumentasi foto dan sematan video langsung dari channel media sosial.</p>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div id="galeriGrid" class="grid md:grid-cols-3 gap-6">
             <!-- Embed Youtube -->
             <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
                 <div class="aspect-video w-full bg-slate-900 flex items-center justify-center relative">
@@ -219,7 +218,6 @@
                         <span class="text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-1 rounded-full">Live Analytics</span>
                     </div>
 
-                    <!-- List Bendera -->
                     <div class="space-y-4">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
@@ -318,7 +316,7 @@
         </div>
     </div>
 
-    <!-- MODAL CMS (INPUT & EDIT DOKUMEN / EMBED MEDIA) -->
+    <!-- MODAL CMS DENGAN OPSI LENGKAP -->
     <div id="cmsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="toggleModal('cmsModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -328,31 +326,40 @@
             
             <form id="cmsForm" onsubmit="simpanKonten(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Kategori Konten</label>
-                    <select id="cmsKategori" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
-                        <option value="Artikel Umum">Artikel Umum</option>
-                        <option value="Artikel Pendidikan">Artikel Pendidikan</option>
-                        <option value="Materi Pembelajaran">Materi Pembelajaran</option>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Kategori Konten</label>
+                    <select id="cmsKategori" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
+                        <optgroup label="Publikasi & Artikel">
+                            <option value="Artikel Umum">Artikel Umum</option>
+                            <option value="Artikel Pendidikan">Artikel Pendidikan</option>
+                            <option value="Materi Pembelajaran">Materi Pembelajaran</option>
+                        </optgroup>
+                        <optgroup label="Aktivitas & Kreativitas">
+                            <option value="Kegiatan Sekolah">Kegiatan Sekolah</option>
+                            <option value="Hasil Karya Siswa">Hasil Karya Siswa</option>
+                        </optgroup>
+                        <optgroup label="Galeri & Media">
+                            <option value="Galeri & Media Embed">Galeri & Media Embed (Video/Foto)</option>
+                        </optgroup>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Judul Dokumen / Posting</label>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Judul Dokumen / Kegiatan / Karya</label>
                     <input type="text" id="cmsJudul" required placeholder="Masukkan judul..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Upload Berkas/Foto</label>
-                    <input type="file" class="w-full border p-2 rounded-lg text-xs">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Upload File Foto / Dokumen (Opsional)</label>
+                    <input type="file" id="cmsFile" accept="image/*" class="w-full border p-2 rounded-lg text-xs">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tempelkan Link Embed (YouTube, TikTok, Instagram, FB)</label>
-                    <input type="url" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tempel Link Embed (YouTube, Instagram, TikTok, FB)</label>
+                    <input type="url" id="cmsEmbed" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Isi Konten / Deskripsi</label>
-                    <textarea id="cmsIsi" rows="4" required placeholder="Tuliskan materi atau deskripsi..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Isi Konten / Deskripsi Singkat</label>
+                    <textarea id="cmsIsi" rows="3" required placeholder="Tuliskan keterangan..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">
-                    Simpan & Publikasikan
+                    Simpan & Publikasikan Konten
                 </button>
             </form>
         </div>
@@ -370,48 +377,117 @@
         // Fungsi Validasi Login Admin
         function handleLogin(event) {
             event.preventDefault();
-            
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
 
             if (user === 'herman' && pass === 'admin2026') {
                 alert('Login Berhasil! Selamat datang Pak Herman.');
                 toggleModal('loginModal');
-                document.getElementById('cmsBtn').classList.remove('hidden'); // Menampilkan tombol CMS
+                document.getElementById('cmsBtn').classList.remove('hidden');
             } else {
                 alert('Username atau Password salah! (Gunakan: herman / admin2026)');
             }
         }
 
-        // Fungsi Publikasi Konten Baru ke Beranda
+        // FUNGSI MULTI-KATEGORI MANAJEMEN KONTEN (CMS)
         function simpanKonten(event) {
             event.preventDefault();
 
-            // 1. Ambil nilai dari form
             const kategori = document.getElementById('cmsKategori').value;
             const judul = document.getElementById('cmsJudul').value;
             const isi = document.getElementById('cmsIsi').value;
+            const embedUrl = document.getElementById('cmsEmbed').value.trim();
+            const fileInput = document.getElementById('cmsFile');
 
-            // 2. Buat elemen kartu artikel baru
-            const kartuBaru = document.createElement('div');
-            kartuBaru.className = 'bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition';
-            
-            kartuBaru.innerHTML = `
-                <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded">${kategori}</span>
-                <h3 class="font-bold text-xl mt-4 text-slate-800 hover:text-indigo-600 transition cursor-pointer">${judul}</h3>
-                <p class="text-slate-600 text-sm mt-2 line-clamp-3">${isi}</p>
-                <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-400">
-                    <span><i class="fa-regular fa-calendar"></i> Baru Saja</span>
-                    <a href="#" class="text-indigo-600 font-semibold hover:underline">Baca Selengkapnya →</a>
-                </div>
-            `;
+            // Default gambar acak jika tidak ada file yang diunggah
+            let imageSrc = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80';
+            if (fileInput.files && fileInput.files[0]) {
+                imageSrc = URL.createObjectURL(fileInput.files[0]);
+            }
 
-            // 3. Masukkan kartu baru ke paling atas daftar artikel di beranda
-            const articleGrid = document.getElementById('articleGrid');
-            articleGrid.prepend(kartuBaru);
+            // 1. OPSI KEGIATAN SEKOLAH
+            if (kategori === 'Kegiatan Sekolah') {
+                const container = document.getElementById('kegiatanList');
+                const item = document.createElement('div');
+                item.className = 'flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50';
+                item.innerHTML = `
+                    <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
+                        <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">Baru Ditolong</span>
+                    </div>
+                `;
+                container.prepend(item);
 
-            // 4. Notifikasi dan bersihkan form
-            alert('Artikel berhasil dipublikasikan dan ditampilkan di beranda!');
+            // 2. OPSI HASIL KARYA SISWA
+            } else if (kategori === 'Hasil Karya Siswa') {
+                const container = document.getElementById('karyaList');
+                const item = document.createElement('div');
+                item.className = 'flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50';
+                item.innerHTML = `
+                    <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
+                    <div>
+                        <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
+                        <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">Karya Terpilih</span>
+                    </div>
+                `;
+                container.prepend(item);
+
+            // 3. OPSI GALERI & MEDIA EMBED (YOUTUBE / FOTO)
+            } else if (kategori === 'Galeri & Media Embed') {
+                const container = document.getElementById('galeriGrid');
+                const item = document.createElement('div');
+                item.className = 'bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100';
+
+                // Cek apakah user menempelkan link YouTube
+                if (embedUrl && (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be'))) {
+                    let videoId = '';
+                    if (embedUrl.includes('v=')) {
+                        videoId = embedUrl.split('v=')[1].split('&')[0];
+                    } else if (embedUrl.includes('youtu.be/')) {
+                        videoId = embedUrl.split('youtu.be/')[1].split('?')[0];
+                    }
+                    item.innerHTML = `
+                        <div class="aspect-video w-full bg-slate-900 flex items-center justify-center relative">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-xs font-bold text-red-600 uppercase flex items-center gap-1"><i class="fa-brands fa-youtube"></i> YouTube Video</span>
+                            <h4 class="font-semibold text-sm mt-1">${judul}</h4>
+                        </div>
+                    `;
+                } else {
+                    // Tampilkan sebagai Galeri Foto
+                    item.innerHTML = `
+                        <img src="${imageSrc}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs font-bold text-indigo-600 uppercase flex items-center gap-1"><i class="fa-solid fa-image"></i> Foto Galeri</span>
+                            <h4 class="font-semibold text-sm mt-1">${judul}</h4>
+                        </div>
+                    `;
+                }
+                container.prepend(item);
+
+            // 4. OPSI ARTIKEL (DEFAULT)
+            } else {
+                const container = document.getElementById('articleGrid');
+                const item = document.createElement('div');
+                item.className = 'bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition';
+                item.innerHTML = `
+                    <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded">${kategori}</span>
+                    <h3 class="font-bold text-xl mt-4 text-slate-800 hover:text-indigo-600 transition cursor-pointer">${judul}</h3>
+                    <p class="text-slate-600 text-sm mt-2 line-clamp-3">${isi}</p>
+                    <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-400">
+                        <span><i class="fa-regular fa-calendar"></i> Baru Saja</span>
+                        <a href="#" class="text-indigo-600 font-semibold hover:underline">Baca Selengkapnya →</a>
+                    </div>
+                `;
+                container.prepend(item);
+            }
+
+            alert(`Konten berhasil ditambahkan ke bagian ${kategori}!`);
             toggleModal('cmsModal');
             document.getElementById('cmsForm').reset();
         }
