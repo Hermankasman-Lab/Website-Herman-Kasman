@@ -21,7 +21,7 @@
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-lg">HK</div>
-                    <span class="font-bold text-xl text-slate-800">Herman Kasman</span>
+                    <span id="navBrandName" class="font-bold text-xl text-slate-800">Herman Kasman</span>
                 </div>
                 <!-- Menu Desktop -->
                 <div class="hidden md:flex space-x-6 text-sm font-medium">
@@ -45,23 +45,33 @@
     <section id="profil" class="py-16 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
             
-            <!-- WADAH FOTO PROFIL DENGAN TOMBOL EDIT -->
+            <!-- FOTO PROFIL DENGAN TOMBOL EDIT -->
             <div class="relative group shrink-0">
                 <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-indigo-400/30 shadow-2xl">
                     <img id="profileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Herman Kasman" class="w-full h-full object-cover">
                 </div>
-                <!-- Tombol Kamera Mengambang (Muncul Saat Admin Login) -->
+                <!-- Tombol Kamera Mengambang -->
                 <button id="changeProfileBtn" onclick="toggleModal('profileModal')" class="hidden absolute bottom-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg border-2 border-white items-center justify-center transition-all hover:scale-110 cursor-pointer" title="Ganti Foto Profil">
                     <i class="fa-solid fa-camera text-base"></i>
                 </button>
             </div>
 
+            <!-- TULISAN PROFIL DENGAN ID UNTUK DIUBAH -->
             <div class="space-y-4 text-center md:text-left">
-                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-400/30">Pendidik & Inovator Edukasi</span>
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Herman Kasman, M.Pd.</h1>
-                <p class="text-slate-300 max-w-2xl text-base md:text-lg leading-relaxed">
+                <div class="flex items-center justify-center md:justify-start gap-3 flex-wrap">
+                    <span id="heroBadge" class="bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-400/30">PENDIDIK & INOVATOR EDUKASI</span>
+                    
+                    <!-- Tombol Edit Teks Profil (Muncul Setelah Login Admin) -->
+                    <button id="editHeroBtn" onclick="openEditHeroModal()" class="hidden bg-indigo-500/30 hover:bg-indigo-500/50 text-indigo-200 border border-indigo-400/30 px-3 py-1 rounded-full text-xs font-semibold transition items-center gap-1.5 cursor-pointer">
+                        <i class="fa-solid fa-pen text-[10px]"></i> Edit Teks Profil
+                    </button>
+                </div>
+
+                <h1 id="heroName" class="text-4xl md:text-5xl font-extrabold tracking-tight">Herman Kasman, M.Pd.</h1>
+                <p id="heroDesc" class="text-slate-300 max-w-2xl text-base md:text-lg leading-relaxed">
                     Selamat datang di portal pribadi dan pembelajaran resmi. Tempat berbagi gagasan, artikel pendidikan, karya siswa, serta dokumentasi kegiatan sekolah secara interaktif.
                 </p>
+
                 <!-- Social Links -->
                 <div class="flex justify-center md:justify-start space-x-4 pt-2">
                     <a href="#" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
@@ -209,7 +219,7 @@
         </div>
     </section>
 
-    <!-- DASHBOARD SECTION (TRAFIK BENDERA & KALENDER ONLINE) -->
+    <!-- DASHBOARD SECTION -->
     <section id="dashboard" class="py-16 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -218,7 +228,7 @@
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8">
-                <!-- Dashboard Traffic Pengunjung (Bendera Negara) -->
+                <!-- Dashboard Traffic Pengunjung -->
                 <div class="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/50 backdrop-blur-sm">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-bold flex items-center gap-2">
@@ -325,7 +335,35 @@
         </div>
     </div>
 
-    <!-- MODAL KHUSUS GANTI FOTO PROFIL -->
+    <!-- MODAL KHUSUS EDIT TEKS PROFIL HERO -->
+    <div id="editHeroModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <button onclick="toggleModal('editHeroModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-indigo-600"></i> Edit Teks Profil Utama
+            </h3>
+            
+            <form onsubmit="updateTeksHero(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tagline / Jabatan (Teks Atas)</label>
+                    <input type="text" id="inputHeroBadge" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap & Gelar</label>
+                    <input type="text" id="inputHeroName" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Deskripsi Singkat / Bio</label>
+                    <textarea id="inputHeroDesc" rows="4" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">
+                    Simpan Perubahan Teks
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL GANTI FOTO PROFIL -->
     <div id="profileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
             <button onclick="toggleModal('profileModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -350,7 +388,7 @@
         </div>
     </div>
 
-    <!-- MODAL CMS DENGAN OPSI LENGKAP -->
+    <!-- MODAL CMS MANAJEMEN KONTEN -->
     <div id="cmsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button onclick="toggleModal('cmsModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
@@ -362,9 +400,6 @@
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih Kategori Konten</label>
                     <select id="cmsKategori" class="w-full px-3 py-2 border rounded-lg text-sm outline-none bg-white">
-                        <optgroup label="Pengaturan Profil">
-                            <option value="Ganti Foto Profil">Ganti Foto Profil Utamamu</option>
-                        </optgroup>
                         <optgroup label="Publikasi & Artikel">
                             <option value="Artikel Umum">Artikel Umum</option>
                             <option value="Artikel Pendidikan">Artikel Pendidikan</option>
@@ -404,7 +439,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Modal Toggle Function
+        // Toggle Modal Display
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.classList.toggle('hidden');
@@ -424,16 +459,49 @@
                 // Tampilkan Tombol Admin
                 document.getElementById('cmsBtn').classList.remove('hidden');
                 
-                // Tampilkan Tombol Ubah Foto Profil di Atas Gambar
+                // Tampilkan Tombol Ubah Foto Profil
                 const profileBtn = document.getElementById('changeProfileBtn');
                 profileBtn.classList.remove('hidden');
                 profileBtn.classList.add('flex');
+
+                // Tampilkan Tombol Edit Teks Profil
+                const editHeroBtn = document.getElementById('editHeroBtn');
+                editHeroBtn.classList.remove('hidden');
+                editHeroBtn.classList.add('inline-flex');
             } else {
                 alert('Username atau Password salah! (Gunakan: herman / admin2026)');
             }
         }
 
-        // FUNGSI GANTI FOTO PROFIL KHUSUS
+        // FUNGSI MEMBUKA MODAL & ISI OTOMATIS TEKS SAAT INI
+        function openEditHeroModal() {
+            document.getElementById('inputHeroBadge').value = document.getElementById('heroBadge').innerText;
+            document.getElementById('inputHeroName').value = document.getElementById('heroName').innerText;
+            document.getElementById('inputHeroDesc').value = document.getElementById('heroDesc').innerText;
+            toggleModal('editHeroModal');
+        }
+
+        // FUNGSI MENGUBAH TEKS HERO PROFIL
+        function updateTeksHero(event) {
+            event.preventDefault();
+            
+            const badgeValue = document.getElementById('inputHeroBadge').value;
+            const nameValue = document.getElementById('inputHeroName').value;
+            const descValue = document.getElementById('inputHeroDesc').value;
+
+            // Perbarui teks di halaman utama
+            document.getElementById('heroBadge').innerText = badgeValue;
+            document.getElementById('heroName').innerText = nameValue;
+            document.getElementById('heroDesc').innerText = descValue;
+            
+            // Perbarui juga nama di Navbar
+            document.getElementById('navBrandName').innerText = nameValue.split(',')[0]; 
+
+            alert('Teks profil berhasil diperbarui!');
+            toggleModal('editHeroModal');
+        }
+
+        // FUNGSI GANTI FOTO PROFIL
         function updateFotoProfil(event) {
             event.preventDefault();
             const fileInput = document.getElementById('profileFileInput');
@@ -466,30 +534,11 @@
             const embedUrl = document.getElementById('cmsEmbed').value.trim();
             const fileInput = document.getElementById('cmsFile');
 
-            // 0. OPSI KHUSUS: GANTI FOTO PROFIL DARI CMS
-            if (kategori === 'Ganti Foto Profil') {
-                if (fileInput.files && fileInput.files[0]) {
-                    document.getElementById('profileImg').src = URL.createObjectURL(fileInput.files[0]);
-                    alert('Foto profil utama Anda berhasil diperbarui!');
-                } else if (embedUrl !== '') {
-                    document.getElementById('profileImg').src = embedUrl;
-                    alert('Foto profil utama Anda berhasil diperbarui dari URL!');
-                } else {
-                    alert('Silakan unggah foto atau isi link URL foto untuk mengganti profil!');
-                    return;
-                }
-                toggleModal('cmsModal');
-                document.getElementById('cmsForm').reset();
-                return;
-            }
-
-            // Default gambar acak jika tidak ada file yang diunggah
             let imageSrc = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80';
             if (fileInput.files && fileInput.files[0]) {
                 imageSrc = URL.createObjectURL(fileInput.files[0]);
             }
 
-            // 1. OPSI KEGIATAN SEKOLAH
             if (kategori === 'Kegiatan Sekolah') {
                 const container = document.getElementById('kegiatanList');
                 const item = document.createElement('div');
@@ -504,7 +553,6 @@
                 `;
                 container.prepend(item);
 
-            // 2. OPSI HASIL KARYA SISWA
             } else if (kategori === 'Hasil Karya Siswa') {
                 const container = document.getElementById('karyaList');
                 const item = document.createElement('div');
@@ -519,7 +567,6 @@
                 `;
                 container.prepend(item);
 
-            // 3. OPSI GALERI & MEDIA EMBED (YOUTUBE / FOTO)
             } else if (kategori === 'Galeri & Media Embed') {
                 const container = document.getElementById('galeriGrid');
                 const item = document.createElement('div');
@@ -552,7 +599,6 @@
                 }
                 container.prepend(item);
 
-            // 4. OPSI ARTIKEL (DEFAULT)
             } else {
                 const container = document.getElementById('articleGrid');
                 const item = document.createElement('div');
@@ -574,7 +620,7 @@
             document.getElementById('cmsForm').reset();
         }
 
-        // Inisialisasi FullCalendar Online
+        // Inisialisasi FullCalendar
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
