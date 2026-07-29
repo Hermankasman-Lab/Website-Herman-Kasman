@@ -43,12 +43,11 @@
     <section id="profil" class="py-16 bg-gradient-to-br from-indigo-900 via-slate-900 to-indigo-950 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
             
-            <!-- FOTO PROFIL DENGAN TOMBOL EDIT -->
+            <!-- FOTO PROFIL -->
             <div class="relative group shrink-0">
                 <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-indigo-400/30 shadow-2xl">
                     <img id="profileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Herman Kasman" class="w-full h-full object-cover">
                 </div>
-                <!-- Tombol Kamera Mengambang -->
                 <button id="changeProfileBtn" onclick="toggleModal('profileModal')" class="hidden absolute bottom-2 right-2 bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-lg border-2 border-white items-center justify-center transition-all hover:scale-110 cursor-pointer" title="Ganti Foto Profil">
                     <i class="fa-solid fa-camera text-base"></i>
                 </button>
@@ -58,8 +57,6 @@
             <div class="space-y-4 text-center md:text-left">
                 <div class="flex items-center justify-center md:justify-start gap-3 flex-wrap">
                     <span id="heroBadge" class="bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider border border-indigo-400/30">PENDIDIK & INOVATOR EDUKASI</span>
-                    
-                    <!-- Tombol Edit Teks Profil -->
                     <button id="editHeroBtn" onclick="openEditHeroModal()" class="hidden bg-indigo-500/30 hover:bg-indigo-500/50 text-indigo-200 border border-indigo-400/30 px-3 py-1 rounded-full text-xs font-semibold transition items-center gap-1.5 cursor-pointer">
                         <i class="fa-solid fa-pen text-[10px]"></i> Edit Teks Profil
                     </button>
@@ -70,14 +67,13 @@
                     Selamat datang di portal pribadi dan pembelajaran resmi. Tempat berbagi gagasan, artikel pendidikan, karya siswa, serta dokumentasi kegiatan sekolah secara interaktif.
                 </p>
 
-                <!-- LINK MEDIA SOSIAL + TOMBOL EDIT MEDSOS -->
+                <!-- LINK MEDIA SOSIAL -->
                 <div class="flex items-center justify-center md:justify-start space-x-3 pt-2 flex-wrap gap-y-2">
                     <a id="linkYoutube" href="#" target="_blank" rel="noopener noreferrer" title="YouTube" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
                     <a id="linkInstagram" href="#" target="_blank" rel="noopener noreferrer" title="Instagram" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
                     <a id="linkTiktok" href="#" target="_blank" rel="noopener noreferrer" title="TikTok" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-black text-white flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
                     <a id="linkFacebook" href="#" target="_blank" rel="noopener noreferrer" title="Facebook" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center transition"><i class="fa-brands fa-facebook"></i></a>
                     
-                    <!-- Tombol Edit Link Medsos (Muncul hanya saat Login Admin) -->
                     <button id="editSocialBtn" onclick="openEditSocialModal()" class="hidden bg-slate-800 hover:bg-slate-700 text-xs text-indigo-300 border border-indigo-400/30 px-3 py-2 rounded-full font-semibold transition items-center gap-1.5 cursor-pointer ml-1">
                         <i class="fa-solid fa-link text-[11px]"></i> Edit Link Medsos
                     </button>
@@ -184,6 +180,35 @@
         <p>© 2026 Website Resmi Herman Kasman, M.Pd. All Rights Reserved.</p>
     </footer>
 
+    <!-- MODAL MEMBACA ARTIKEL SELENGKAPNYA (BARU) -->
+    <div id="readArticleModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="toggleModal('readArticleModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-3">
+                <span id="readModalCategory" class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded">Kategori</span>
+                <span id="readModalDate" class="text-slate-400 text-xs flex items-center gap-1"><i class="fa-regular fa-calendar"></i> Tanggal</span>
+            </div>
+            <h2 id="readModalTitle" class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 leading-tight">Judul Artikel</h2>
+            
+            <!-- Tempat Foto Tambahan (Jika Ada) -->
+            <div id="readModalImageContainer" class="mb-5 hidden">
+                <img id="readModalImage" src="" class="w-full h-64 md:h-80 object-cover rounded-xl shadow-sm border border-slate-100">
+            </div>
+
+            <div id="readModalContent" class="text-slate-700 text-base leading-relaxed space-y-4 whitespace-pre-line border-t border-slate-100 pt-4">
+                <!-- Isi postingan artikel lengkap dimasukkan di sini -->
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-slate-100 flex justify-end">
+                <button onclick="toggleModal('readArticleModal')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-2.5 rounded-xl text-sm font-semibold transition">
+                    Tutup Bacaan
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL LOGIN ADMIN -->
     <div id="loginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
@@ -216,25 +241,24 @@
             <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <i class="fa-solid fa-share-nodes text-indigo-600"></i> Kelola Link Media Sosial
             </h3>
-            <p class="text-xs text-slate-500 -mt-2 mb-4">Pengunjung akan diarahkan ke link ini saat mengklik logo medsos.</p>
             <form onsubmit="updateSocialLinks(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-youtube text-red-600 mr-1"></i> Link Channel YouTube</label>
-                    <input type="url" id="inputYtLink" placeholder="https://youtube.com/@nama_channel" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-youtube text-red-600 mr-1"></i> Link YouTube</label>
+                    <input type="url" id="inputYtLink" placeholder="https://youtube.com/@nama_channel" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-instagram text-pink-600 mr-1"></i> Link Profil Instagram</label>
-                    <input type="url" id="inputIgLink" placeholder="https://instagram.com/username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-instagram text-pink-600 mr-1"></i> Link Instagram</label>
+                    <input type="url" id="inputIgLink" placeholder="https://instagram.com/username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-tiktok text-black mr-1"></i> Link Profil TikTok</label>
-                    <input type="url" id="inputTtLink" placeholder="https://tiktok.com/@username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-tiktok text-black mr-1"></i> Link TikTok</label>
+                    <input type="url" id="inputTtLink" placeholder="https://tiktok.com/@username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-facebook text-blue-600 mr-1"></i> Link Halaman Facebook</label>
-                    <input type="url" id="inputFbLink" placeholder="https://facebook.com/username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <label class="block text-xs font-semibold text-slate-700 mb-1"><i class="fa-brands fa-facebook text-blue-600 mr-1"></i> Link Facebook</label>
+                    <input type="url" id="inputFbLink" placeholder="https://facebook.com/username" class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">Simpan & Terapkan Link</button>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">Simpan Link</button>
             </form>
         </div>
     </div>
@@ -249,15 +273,15 @@
             <form onsubmit="updateTeksHero(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Tagline / Jabatan</label>
-                    <input type="text" id="inputHeroBadge" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" id="inputHeroBadge" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Lengkap & Gelar</label>
-                    <input type="text" id="inputHeroName" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" id="inputHeroName" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 mb-1">Deskripsi Singkat / Bio</label>
-                    <textarea id="inputHeroDesc" rows="4" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    <textarea id="inputHeroDesc" rows="4" required class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">Simpan Perubahan Teks</button>
             </form>
@@ -324,41 +348,42 @@
                     <input type="url" id="cmsEmbed" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Isi Konten / Deskripsi Singkat</label>
-                    <textarea id="cmsIsi" rows="3" placeholder="Tuliskan keterangan..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Isi Konten / Deskripsi Lengkap</label>
+                    <textarea id="cmsIsi" rows="4" placeholder="Tuliskan isi tulisan selengkapnya di sini..." class="w-full px-3 py-2 border rounded-lg text-sm outline-none"></textarea>
                 </div>
                 <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-lg text-sm font-semibold transition">Simpan & Publikasikan Konten</button>
             </form>
         </div>
     </div>
 
-    <!-- JAVASCRIPT & LOCAL STORAGE PERSISTENCE LOGIC -->
+    <!-- JAVASCRIPT & LOGIC BACA SELENGKAPNYA -->
     <script>
-        // Toggle Modal Helper
+        // Helper Toggle Modal
         function toggleModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.classList.toggle('hidden');
             modal.classList.toggle('flex');
         }
 
-        // Konten Default
+        // Data Default
         const defaultPosts = [
-            { kategori: 'Artikel Umum', judul: 'Menghadapi Tantangan Era Digital di Dunia Pendidikan', isi: 'Ulasan mendalam mengenai integrasi teknologi kecerdasan buatan dalam proses belajar mengajar sehari-hari.', date: '24 Juli 2026' },
-            { kategori: 'Artikel Pendidikan', judul: 'Metode Active Learning Berbasis Projek', isi: 'Bagaimana meningkatkan keterlibatan siswa di kelas melalui pendekatan pemecahan masalah nyata.', date: '18 Juli 2026' },
-            { kategori: 'Materi Pembelajaran', judul: 'Modul Interaktif: Dasar-Dasar Pemrograman Web', isi: 'Unduh berkas modul pembelajaran HTML, CSS, dan JavaScript dasar untuk siswa tingkat menengah.', date: 'Modul PDF' },
+            { kategori: 'Artikel Umum', judul: 'Visual Branding untuk Sekolah Modern', isi: 'Visual branding bukan sekadar tentang pembuat logo, tetapi tentang bagaimana membangun persepsi publik dan identitas edukasi yang kuat, profesional, serta berkarakter di era digital saat ini.', date: 'Baru Saja' },
+            { kategori: 'Artikel Umum', judul: 'Menghadapi Tantangan Era Digital di Dunia Pendidikan', isi: 'Ulasan mendalam mengenai integrasi teknologi kecerdasan buatan dalam proses belajar mengajar sehari-hari. Pendidikan di abad ke-21 menuntut fleksibilitas guru dan siswa untuk dapat menggunakan alat digital secara kritis dan produktif.', date: '24 Juli 2026' },
+            { kategori: 'Artikel Pendidikan', judul: 'Metode Active Learning Berbasis Projek', isi: 'Bagaimana meningkatkan keterlibatan siswa di kelas melalui pendekatan pemecahan masalah nyata. Melalui pembelajaran berbasis projek, siswa tidak hanya menghafal teori tetapi juga mengaplikasikannya secara langsung.', date: '18 Juli 2026' },
+            { kategori: 'Materi Pembelajaran', judul: 'Modul Interaktif: Dasar-Dasar Pemrograman Web', isi: 'Unduh berkas modul pembelajaran HTML, CSS, dan JavaScript dasar untuk siswa tingkat menengah. Disertai latihan praktis dan studi kasus pembuatan website portofolio.', date: 'Modul PDF' },
             { kategori: 'Kegiatan Sekolah', judul: 'Workshop Literasi Digital Siswa', isi: 'Pelatihan pembuatan konten edukatif dan etika bermedia sosial.', imageSrc: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=200&q=80', date: '10 Juli 2026' },
             { kategori: 'Hasil Karya Siswa', judul: 'Desain Poster Kampanye Lingkungan', isi: 'Karya Kelas XI MIPA - Juara 1 Lomba Seni Antar Sekolah.', imageSrc: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=200&q=80' },
             { kategori: 'Galeri & Media Embed', judul: 'Dokumentasi Seminar Pendidikan 2026', embedUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' }
         ];
 
-        // LOAD DATA SAAT DIBUKA / REFRESH
+        // LOAD DATA SAAT BUKA HALAMAN
         document.addEventListener('DOMContentLoaded', function() {
             loadSavedProfileData();
             loadSavedSocialLinks();
             loadSavedCMSPosts();
             checkAdminSession();
 
-            // Calendar init
+            // Calendar
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -371,157 +396,31 @@
             calendar.render();
         });
 
-        // 1. MEMUAT LINK MEDIA SOSIAL DARI LOCALSTORAGE
-        function loadSavedSocialLinks() {
-            const yt = localStorage.getItem('hk_social_yt') || 'https://youtube.com';
-            const ig = localStorage.getItem('hk_social_ig') || 'https://instagram.com';
-            const tt = localStorage.getItem('hk_social_tt') || 'https://tiktok.com';
-            const fb = localStorage.getItem('hk_social_fb') || 'https://facebook.com';
+        // FUNSI MEMBACA ARTIKEL UTUH (DIPANGGIL SAAT BACA SELENGKAPNYA DIKLIK)
+        function bacaArtikel(index) {
+            const currentPosts = JSON.parse(localStorage.getItem('hk_cms_posts')) || defaultPosts;
+            const post = currentPosts[index];
+            if (!post) return;
 
-            document.getElementById('linkYoutube').href = yt;
-            document.getElementById('linkInstagram').href = ig;
-            document.getElementById('linkTiktok').href = tt;
-            document.getElementById('linkFacebook').href = fb;
-        }
+            document.getElementById('readModalCategory').innerText = post.kategori || 'Artikel';
+            document.getElementById('readModalDate').innerHTML = `<i class="fa-regular fa-calendar mr-1"></i> ${post.date || 'Terbaru'}`;
+            document.getElementById('readModalTitle').innerText = post.judul;
+            document.getElementById('readModalContent').innerText = post.isi || 'Tidak ada teks deskripsi.';
 
-        // EDIT LINK MEDIA SOSIAL
-        function openEditSocialModal() {
-            document.getElementById('inputYtLink').value = localStorage.getItem('hk_social_yt') || '';
-            document.getElementById('inputIgLink').value = localStorage.getItem('hk_social_ig') || '';
-            document.getElementById('inputTtLink').value = localStorage.getItem('hk_social_tt') || '';
-            document.getElementById('inputFbLink').value = localStorage.getItem('hk_social_fb') || '';
-            toggleModal('socialModal');
-        }
+            const imgContainer = document.getElementById('readModalImageContainer');
+            const imgEl = document.getElementById('readModalImage');
 
-        function updateSocialLinks(event) {
-            event.preventDefault();
-            const yt = document.getElementById('inputYtLink').value.trim() || 'https://youtube.com';
-            const ig = document.getElementById('inputIgLink').value.trim() || 'https://instagram.com';
-            const tt = document.getElementById('inputTtLink').value.trim() || 'https://tiktok.com';
-            const fb = document.getElementById('inputFbLink').value.trim() || 'https://facebook.com';
-
-            localStorage.setItem('hk_social_yt', yt);
-            localStorage.setItem('hk_social_ig', ig);
-            localStorage.setItem('hk_social_tt', tt);
-            localStorage.setItem('hk_social_fb', fb);
-
-            loadSavedSocialLinks();
-            alert('Link Media Sosial berhasil diperbarui!');
-            toggleModal('socialModal');
-        }
-
-        // 2. MEMUAT DATA PROFIL DARI LOCALSTORAGE
-        function loadSavedProfileData() {
-            const savedImg = localStorage.getItem('hk_profile_img');
-            const savedBadge = localStorage.getItem('hk_profile_badge');
-            const savedName = localStorage.getItem('hk_profile_name');
-            const savedDesc = localStorage.getItem('hk_profile_desc');
-
-            if (savedImg) document.getElementById('profileImg').src = savedImg;
-            if (savedBadge) document.getElementById('heroBadge').innerText = savedBadge;
-            if (savedName) {
-                document.getElementById('heroName').innerText = savedName;
-                document.getElementById('navBrandName').innerText = savedName.split(',')[0];
-            }
-            if (savedDesc) document.getElementById('heroDesc').innerText = savedDesc;
-        }
-
-        // 3. CHECK STATUS LOGIN ADMIN
-        function checkAdminSession() {
-            if (localStorage.getItem('hk_is_admin') === 'true') {
-                showAdminButtons();
-            }
-        }
-
-        function showAdminButtons() {
-            document.getElementById('cmsBtn').classList.remove('hidden');
-            
-            const profileBtn = document.getElementById('changeProfileBtn');
-            profileBtn.classList.remove('hidden');
-            profileBtn.classList.add('flex');
-
-            const editHeroBtn = document.getElementById('editHeroBtn');
-            editHeroBtn.classList.remove('hidden');
-            editHeroBtn.classList.add('inline-flex');
-
-            const editSocialBtn = document.getElementById('editSocialBtn');
-            editSocialBtn.classList.remove('hidden');
-            editSocialBtn.classList.add('inline-flex');
-
-            document.getElementById('adminLoginStatusBtn').innerHTML = `<i class="fa-solid fa-user-check text-xs"></i> Admin Active`;
-            document.getElementById('adminLoginStatusBtn').classList.replace('bg-indigo-600', 'bg-emerald-600');
-        }
-
-        // 4. HANDLER LOGIN ADMIN
-        function handleLogin(event) {
-            event.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-
-            if (user === 'herman' && pass === 'admin2026') {
-                localStorage.setItem('hk_is_admin', 'true');
-                showAdminButtons();
-                alert('Login Berhasil! Anda sekarang dapat mengelola link medsos, profil, dan konten.');
-                toggleModal('loginModal');
+            if (post.imageSrc && post.imageSrc.startsWith('data:image')) {
+                imgEl.src = post.imageSrc;
+                imgContainer.classList.remove('hidden');
             } else {
-                alert('Username/Password salah! (Gunakan: herman / admin2026)');
-            }
-        }
-
-        // 5. UPDATE TEKS HERO PROFIL
-        function openEditHeroModal() {
-            document.getElementById('inputHeroBadge').value = document.getElementById('heroBadge').innerText;
-            document.getElementById('inputHeroName').value = document.getElementById('heroName').innerText;
-            document.getElementById('inputHeroDesc').value = document.getElementById('heroDesc').innerText;
-            toggleModal('editHeroModal');
-        }
-
-        function updateTeksHero(event) {
-            event.preventDefault();
-            const badge = document.getElementById('inputHeroBadge').value;
-            const name = document.getElementById('inputHeroName').value;
-            const desc = document.getElementById('inputHeroDesc').value;
-
-            document.getElementById('heroBadge').innerText = badge;
-            document.getElementById('heroName').innerText = name;
-            document.getElementById('heroDesc').innerText = desc;
-            document.getElementById('navBrandName').innerText = name.split(',')[0];
-
-            localStorage.setItem('hk_profile_badge', badge);
-            localStorage.setItem('hk_profile_name', name);
-            localStorage.setItem('hk_profile_desc', desc);
-
-            alert('Teks profil tersimpan!');
-            toggleModal('editHeroModal');
-        }
-
-        // 6. UPDATE FOTO PROFIL
-        function updateFotoProfil(event) {
-            event.preventDefault();
-            const fileInput = document.getElementById('profileFileInput');
-            const urlInput = document.getElementById('profileUrlInput').value.trim();
-
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64Img = e.target.result;
-                    document.getElementById('profileImg').src = base64Img;
-                    localStorage.setItem('hk_profile_img', base64Img);
-                    alert('Foto profil tersimpan!');
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else if (urlInput !== '') {
-                document.getElementById('profileImg').src = urlInput;
-                localStorage.setItem('hk_profile_img', urlInput);
-                alert('Foto profil dari URL tersimpan!');
+                imgContainer.classList.add('hidden');
             }
 
-            toggleModal('profileModal');
-            fileInput.value = '';
-            document.getElementById('profileUrlInput').value = '';
+            toggleModal('readArticleModal');
         }
 
-        // 7. MANAJEMEN KONTEN CMS
+        // LOAD KONTEN CMS & RENDER
         function loadSavedCMSPosts() {
             const savedPosts = JSON.parse(localStorage.getItem('hk_cms_posts')) || defaultPosts;
             document.getElementById('articleGrid').innerHTML = '';
@@ -529,9 +428,81 @@
             document.getElementById('karyaList').innerHTML = '';
             document.getElementById('galeriGrid').innerHTML = '';
 
-            savedPosts.forEach(post => renderPostToDOM(post));
+            savedPosts.forEach((post, index) => renderPostToDOM(post, index));
         }
 
+        function renderPostToDOM(post, index) {
+            const { kategori, judul, isi, embedUrl, imageSrc, date } = post;
+
+            if (kategori === 'Kegiatan Sekolah') {
+                const container = document.getElementById('kegiatanList');
+                const html = `
+                    <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50">
+                        <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
+                            <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
+                            <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">${date || 'Kegiatan'}</span>
+                        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', html);
+
+            } else if (kategori === 'Hasil Karya Siswa') {
+                const container = document.getElementById('karyaList');
+                const html = `
+                    <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50">
+                        <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
+                            <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
+                            <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">Karya Terpilih</span>
+                        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', html);
+
+            } else if (kategori === 'Galeri & Media Embed') {
+                const container = document.getElementById('galeriGrid');
+                let mediaHtml = `<img src="${imageSrc || 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80'}" class="w-full h-48 object-cover">`;
+                
+                if (embedUrl && (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be'))) {
+                    let videoId = embedUrl.includes('v=') ? embedUrl.split('v=')[1].split('&')[0] : embedUrl.split('youtu.be/')[1].split('?')[0];
+                    mediaHtml = `<div class="aspect-video w-full bg-slate-900 flex items-center justify-center relative">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                    </div>`;
+                }
+
+                const html = `
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
+                        ${mediaHtml}
+                        <div class="p-4">
+                            <span class="text-xs font-bold text-indigo-600 uppercase flex items-center gap-1"><i class="fa-solid fa-photo-film"></i> Galeri Media</span>
+                            <h4 class="font-semibold text-sm mt-1">${judul}</h4>
+                        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', html);
+
+            } else {
+                // TAMPILAN KARTU ARTIKEL (DENGAN TOMBOL BACA SELENGKAPNYA INTERAKTIF)
+                const container = document.getElementById('articleGrid');
+                const html = `
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded">${kategori}</span>
+                            <h3 onclick="bacaArtikel(${index})" class="font-bold text-xl mt-4 text-slate-800 hover:text-indigo-600 transition cursor-pointer leading-snug">${judul}</h3>
+                            <p class="text-slate-600 text-sm mt-2 line-clamp-3">${isi}</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-400">
+                            <span><i class="fa-regular fa-calendar"></i> ${date || 'Terbaru'}</span>
+                            <button onclick="bacaArtikel(${index})" class="text-indigo-600 hover:text-indigo-800 font-semibold hover:underline flex items-center gap-1 cursor-pointer group">
+                                Baca Selengkapnya <span class="group-hover:translate-x-1 transition-transform">→</span>
+                            </button>
+                        </div>
+                    </div>`;
+                container.insertAdjacentHTML('beforeend', html);
+            }
+        }
+
+        // SIMPAN KONTEN CMS BARU
         function simpanKonten(event) {
             event.preventDefault();
             const kategori = document.getElementById('cmsKategori').value;
@@ -558,76 +529,143 @@
             currentPosts.unshift(postObj);
             localStorage.setItem('hk_cms_posts', JSON.stringify(currentPosts));
 
-            renderPostToDOM(postObj, true);
-            alert(`Konten berhasil diterbitkan dan tersimpan!`);
+            loadSavedCMSPosts(); // Refresh semua kartu & nomor indeks
+            alert(`Konten berhasil diterbitkan!`);
             toggleModal('cmsModal');
             document.getElementById('cmsForm').reset();
         }
 
-        function renderPostToDOM(post, prepend = false) {
-            const { kategori, judul, isi, embedUrl, imageSrc, date } = post;
+        // LOAD DATA SOSIAL & PROFIL
+        function loadSavedSocialLinks() {
+            const yt = localStorage.getItem('hk_social_yt') || 'https://youtube.com';
+            const ig = localStorage.getItem('hk_social_ig') || 'https://instagram.com';
+            const tt = localStorage.getItem('hk_social_tt') || 'https://tiktok.com';
+            const fb = localStorage.getItem('hk_social_fb') || 'https://facebook.com';
 
-            if (kategori === 'Kegiatan Sekolah') {
-                const container = document.getElementById('kegiatanList');
-                const html = `
-                    <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50">
-                        <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
-                            <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
-                            <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">${date || 'Kegiatan'}</span>
-                        </div>
-                    </div>`;
-                prepend ? container.insertAdjacentHTML('afterbegin', html) : container.insertAdjacentHTML('beforeend', html);
+            document.getElementById('linkYoutube').href = yt;
+            document.getElementById('linkInstagram').href = ig;
+            document.getElementById('linkTiktok').href = tt;
+            document.getElementById('linkFacebook').href = fb;
+        }
 
-            } else if (kategori === 'Hasil Karya Siswa') {
-                const container = document.getElementById('karyaList');
-                const html = `
-                    <div class="flex gap-4 items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50">
-                        <img src="${imageSrc}" class="w-20 h-20 rounded-lg object-cover shrink-0">
-                        <div>
-                            <h4 class="font-bold text-sm text-slate-800">${judul}</h4>
-                            <p class="text-xs text-slate-500 mt-1 line-clamp-2">${isi}</p>
-                            <span class="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium mt-2 inline-block">Karya Terpilih</span>
-                        </div>
-                    </div>`;
-                prepend ? container.insertAdjacentHTML('afterbegin', html) : container.insertAdjacentHTML('beforeend', html);
+        function openEditSocialModal() {
+            document.getElementById('inputYtLink').value = localStorage.getItem('hk_social_yt') || '';
+            document.getElementById('inputIgLink').value = localStorage.getItem('hk_social_ig') || '';
+            document.getElementById('inputTtLink').value = localStorage.getItem('hk_social_tt') || '';
+            document.getElementById('inputFbLink').value = localStorage.getItem('hk_social_fb') || '';
+            toggleModal('socialModal');
+        }
 
-            } else if (kategori === 'Galeri & Media Embed') {
-                const container = document.getElementById('galeriGrid');
-                let mediaHtml = `<img src="${imageSrc || 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80'}" class="w-full h-48 object-cover">`;
-                
-                if (embedUrl && (embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be'))) {
-                    let videoId = embedUrl.includes('v=') ? embedUrl.split('v=')[1].split('&')[0] : embedUrl.split('youtu.be/')[1].split('?')[0];
-                    mediaHtml = `<div class="aspect-video w-full bg-slate-900 flex items-center justify-center relative">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
-                    </div>`;
-                }
+        function updateSocialLinks(event) {
+            event.preventDefault();
+            localStorage.setItem('hk_social_yt', document.getElementById('inputYtLink').value.trim() || 'https://youtube.com');
+            localStorage.setItem('hk_social_ig', document.getElementById('inputIgLink').value.trim() || 'https://instagram.com');
+            localStorage.setItem('hk_social_tt', document.getElementById('inputTtLink').value.trim() || 'https://tiktok.com');
+            localStorage.setItem('hk_social_fb', document.getElementById('inputFbLink').value.trim() || 'https://facebook.com');
 
-                const html = `
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100">
-                        ${mediaHtml}
-                        <div class="p-4">
-                            <span class="text-xs font-bold text-indigo-600 uppercase flex items-center gap-1"><i class="fa-solid fa-photo-film"></i> Galeri Media</span>
-                            <h4 class="font-semibold text-sm mt-1">${judul}</h4>
-                        </div>
-                    </div>`;
-                prepend ? container.insertAdjacentHTML('afterbegin', html) : container.insertAdjacentHTML('beforeend', html);
+            loadSavedSocialLinks();
+            alert('Link Media Sosial berhasil diperbarui!');
+            toggleModal('socialModal');
+        }
 
-            } else {
-                const container = document.getElementById('articleGrid');
-                const html = `
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
-                        <span class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2.5 py-1 rounded">${kategori}</span>
-                        <h3 class="font-bold text-xl mt-4 text-slate-800 hover:text-indigo-600 transition cursor-pointer">${judul}</h3>
-                        <p class="text-slate-600 text-sm mt-2 line-clamp-3">${isi}</p>
-                        <div class="mt-4 pt-4 border-t border-slate-100 flex justify-between text-xs text-slate-400">
-                            <span><i class="fa-regular fa-calendar"></i> ${date || 'Terbaru'}</span>
-                            <a href="#" class="text-indigo-600 font-semibold hover:underline">Baca Selengkapnya →</a>
-                        </div>
-                    </div>`;
-                prepend ? container.insertAdjacentHTML('afterbegin', html) : container.insertAdjacentHTML('beforeend', html);
+        function loadSavedProfileData() {
+            const savedImg = localStorage.getItem('hk_profile_img');
+            const savedBadge = localStorage.getItem('hk_profile_badge');
+            const savedName = localStorage.getItem('hk_profile_name');
+            const savedDesc = localStorage.getItem('hk_profile_desc');
+
+            if (savedImg) document.getElementById('profileImg').src = savedImg;
+            if (savedBadge) document.getElementById('heroBadge').innerText = savedBadge;
+            if (savedName) {
+                document.getElementById('heroName').innerText = savedName;
+                document.getElementById('navBrandName').innerText = savedName.split(',')[0];
             }
+            if (savedDesc) document.getElementById('heroDesc').innerText = savedDesc;
+        }
+
+        function checkAdminSession() {
+            if (localStorage.getItem('hk_is_admin') === 'true') {
+                showAdminButtons();
+            }
+        }
+
+        function showAdminButtons() {
+            document.getElementById('cmsBtn').classList.remove('hidden');
+            document.getElementById('changeProfileBtn').classList.remove('hidden');
+            document.getElementById('changeProfileBtn').classList.add('flex');
+            document.getElementById('editHeroBtn').classList.remove('hidden');
+            document.getElementById('editHeroBtn').classList.add('inline-flex');
+            document.getElementById('editSocialBtn').classList.remove('hidden');
+            document.getElementById('editSocialBtn').classList.add('inline-flex');
+
+            document.getElementById('adminLoginStatusBtn').innerHTML = `<i class="fa-solid fa-user-check text-xs"></i> Admin Active`;
+            document.getElementById('adminLoginStatusBtn').classList.replace('bg-indigo-600', 'bg-emerald-600');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if (user === 'herman' && pass === 'admin2026') {
+                localStorage.setItem('hk_is_admin', 'true');
+                showAdminButtons();
+                alert('Login Berhasil!');
+                toggleModal('loginModal');
+            } else {
+                alert('Username/Password salah! (Gunakan: herman / admin2026)');
+            }
+        }
+
+        function openEditHeroModal() {
+            document.getElementById('inputHeroBadge').value = document.getElementById('heroBadge').innerText;
+            document.getElementById('inputHeroName').value = document.getElementById('heroName').innerText;
+            document.getElementById('inputHeroDesc').value = document.getElementById('heroDesc').innerText;
+            toggleModal('editHeroModal');
+        }
+
+        function updateTeksHero(event) {
+            event.preventDefault();
+            const badge = document.getElementById('inputHeroBadge').value;
+            const name = document.getElementById('inputHeroName').value;
+            const desc = document.getElementById('inputHeroDesc').value;
+
+            document.getElementById('heroBadge').innerText = badge;
+            document.getElementById('heroName').innerText = name;
+            document.getElementById('heroDesc').innerText = desc;
+            document.getElementById('navBrandName').innerText = name.split(',')[0];
+
+            localStorage.setItem('hk_profile_badge', badge);
+            localStorage.setItem('hk_profile_name', name);
+            localStorage.setItem('hk_profile_desc', desc);
+
+            alert('Teks profil tersimpan!');
+            toggleModal('editHeroModal');
+        }
+
+        function updateFotoProfil(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('profileFileInput');
+            const urlInput = document.getElementById('profileUrlInput').value.trim();
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Img = e.target.result;
+                    document.getElementById('profileImg').src = base64Img;
+                    localStorage.setItem('hk_profile_img', base64Img);
+                    alert('Foto profil tersimpan!');
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else if (urlInput !== '') {
+                document.getElementById('profileImg').src = urlInput;
+                localStorage.setItem('hk_profile_img', urlInput);
+                alert('Foto profil tersimpan!');
+            }
+
+            toggleModal('profileModal');
+            fileInput.value = '';
+            document.getElementById('profileUrlInput').value = '';
         }
     </script>
 </body>
